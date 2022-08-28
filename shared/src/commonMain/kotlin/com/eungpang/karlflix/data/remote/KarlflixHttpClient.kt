@@ -10,11 +10,10 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
 class KarlflixHttpClient(
-//    private val movieService: MovieService,
     private val apiKey: String,
 ) {
     companion object {
-        private const val BASE_URL = "http://www.omdbapi.com/?"
+        private const val BASE_URL = "https://www.omdbapi.com/?"
     }
 
     private val httpClient = HttpClient {

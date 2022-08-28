@@ -6,9 +6,27 @@ Build Netflix Clone Mobile Application using the following cool technologies.
 3. Kotlin Multi Platform for business logic
 
 
+## Purpose
+There are several purpose of this work.
+1. Demonstrate how much efficient Kotlin Multiplatform is
+2. Learn how to use SwiftUI well, especially using Combine
+
+
+## Project Roadmap
+
+| # of Weeks | Date | Content | Note |
+| ---------- | ---- | ------- | ---- |
+| 1 | 27 Aug - 2 Sep | Project Setup | Setup KMM Project, Obtain some API access |
+| 2 | 3 Sep - 9 Sep | Set up the final goal & Do design on Figma | Wireframe |
+| 3 | 10 Sep - 16 Sep | TBD |  |
+| 4 | 17 Sep - 23 Sep | TBD |  |
+| 5 | 24 Sep - 30 Sep | TBD |  |
+| 6 | 1 Oct - 7 Oct | TBD |  |
+| 7 | 8 Oct - 15 Oct | TBD |  |
+
 
 ## Prerequisite
-- Xcode, Android Studio, JDK, Kotlin Multi Platform Plugin, Cocoapods, brew (kdoctor), Ruby(2.7)
+- Xcode, Android Studio, JDK, Kotlin Multiplatform Mobile, Cocoapods, brew (kdoctor), Ruby(2.7), Ktor, Koin
 
 Follow the guide below
 [Kotlin Multiplatform Mobile Setup Guide](https://kotlinlang.org/docs/multiplatform-mobile-setup.html#check-your-environment)

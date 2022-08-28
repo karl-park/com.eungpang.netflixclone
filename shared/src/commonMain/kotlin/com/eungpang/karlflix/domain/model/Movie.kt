@@ -19,5 +19,12 @@ data class Movie(
 enum class Type(val text: String) {
     Movie("movie"),
     Series("series"),
-    Episode("episode")
+    Episode("episode"),
+    Unknown("unknown");
+
+    companion object {
+        fun fromValue(type: String): Type {
+            return values().firstOrNull { it.text == type } ?: Unknown
+        }
+    }
 }

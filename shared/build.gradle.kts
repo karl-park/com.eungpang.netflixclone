@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     kotlin("multiplatform")
     id("kotlinx-serialization")
@@ -17,15 +19,12 @@ kotlin {
         }
     }
 
-    val ktorVersion = "2.0.2"
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(libs.koin.core)
 
                 implementation(libs.coroutines.core)
-
-                implementation(libs.kotlinx.dateTime)
 
                 implementation(libs.bundles.ktor.common)
             }

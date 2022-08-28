@@ -25,7 +25,7 @@ data class MovieResponse(
             title = title,
             year = year,
             imdbId = imdbId,
-            type = Type.valueOf(type),
+            type = Type.fromValue(type),
             posterUrl = posterUrl
         )
     }

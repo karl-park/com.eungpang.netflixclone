@@ -1,20 +1,31 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     kotlin("android")
 }
 
+
+
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        applicationId = "com.eungpang.karlflix.android"
+        applicationId = "com.eungpang.karlflix"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
+
     buildTypes {
+        val omdbApiKey = gradleLocalProperties(rootDir).getProperty("OMDB_API_KEY")
+
+        getByName("debug") {
+            buildConfigField("String", "omdbApiKey", "$omdbApiKey")
+        }
         getByName("release") {
             isMinifyEnabled = false
+            buildConfigField("String", "omdbApiKey", "" + omdbApiKey + "")
         }
     }
 
