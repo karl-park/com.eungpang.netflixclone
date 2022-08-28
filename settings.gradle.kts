@@ -9,3 +9,5 @@ pluginManagement {
 rootProject.name = "Karlflix"
 include(":androidApp")
 include(":shared")
+
+enableFeaturePreview("VERSION_CATALOGS")

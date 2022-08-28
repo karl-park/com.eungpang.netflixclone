@@ -1,20 +1,25 @@
 package com.eungpang.karlflix.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import com.eungpang.karlflix.Greeting
-import android.widget.TextView
 
 fun greet(): String {
     return Greeting().greeting()
 }
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        setContent {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Text(text = greet())
+            }
+        }
     }
 }

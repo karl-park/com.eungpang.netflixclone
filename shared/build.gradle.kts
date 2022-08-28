@@ -1,11 +1,12 @@
 plugins {
     kotlin("multiplatform")
+    id("kotlinx-serialization")
     id("com.android.library")
 }
 
 kotlin {
     android()
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -16,15 +17,36 @@ kotlin {
         }
     }
 
+    val ktorVersion = "2.0.2"
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
+        val commonMain by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.koin.core)
+
+                implementation(libs.coroutines.core)
+
+                implementation(libs.kotlinx.dateTime)
+
+                implementation(libs.bundles.ktor.common)
             }
         }
-        val androidMain by getting
-        val androidTest by getting
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.bundles.shared.commonTest)
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.lifecycle.viewmodel)
+                implementation(libs.ktor.client.okHttp)
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation(libs.bundles.shared.androidTest)
+            }
+        }
+
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -33,6 +55,11 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                implementation(libs.ktor.client.ios)
+            }
+
         }
         val iosX64Test by getting
         val iosArm64Test by getting
@@ -47,10 +74,20 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = libs.versions.compileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+    }
+}
+
+// https://kotlinlang.org/docs/multiplatform-mobile-upgrade-app.html#kotlinx-coroutines
+// You'll also use the new memory manager for Kotlin/Native,
+// which will soon become the default.
+// Add the following at the end of the build.gradle.kts file:
+kotlin.targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java) {
+    binaries.all {
+        binaryOptions["memoryModel"] = "experimental"
     }
 }

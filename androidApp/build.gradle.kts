@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "com.eungpang.karlflix.android"
-        minSdk = 21
-        targetSdk = 32
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
@@ -17,11 +17,33 @@ android {
             isMinifyEnabled = false
         }
     }
+
+    buildFeatures {
+        // Enables Jetpack Compose for this module
+        compose = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+
+    implementation(libs.bundles.app.ui)
+    implementation(libs.koin.android)
+    implementation(libs.coroutines.android)
+
+    testImplementation(libs.junit)
+
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.2.1")
 }
