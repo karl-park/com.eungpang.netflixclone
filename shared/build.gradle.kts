@@ -27,6 +27,8 @@ kotlin {
                 implementation(libs.coroutines.core)
 
                 implementation(libs.bundles.ktor.common)
+
+                implementation(libs.bundles.multiplatform)
             }
         }
         val commonTest by getting {

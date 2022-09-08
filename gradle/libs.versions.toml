@@ -15,6 +15,8 @@ koin = "3.2.0"
 ktor = "2.0.2"
 lifecycle = "2.5.1"
 
+russhwolf = "0.9"
+
 
 [libraries]
 
@@ -64,6 +66,9 @@ roboelectric = { module = "org.robolectric:robolectric", version = "4.7.3" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
+russhwolf-multiplatform = { module = "com.russhwolf:multiplatform-settings", version.ref = "russhwolf" }
+russhwolf-multiplatform-noarg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "russhwolf" }
+
 [plugins]
 gradleDependencyUpdate = "com.github.ben-manes.versions:0.42.0"
 
@@ -106,4 +111,7 @@ shared-androidTest = [
     "coroutines-test",
     "roboelectric",
 ]
-
+multiplatform = [
+    "russhwolf-multiplatform",
+    "russhwolf-multiplatform-noarg"
+]

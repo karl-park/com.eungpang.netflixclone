@@ -43,7 +43,7 @@ class KarlflixHttpClient(
 
     suspend fun searchMovie(title: String, page: Int = 1, type: String = "") : Result<List<Movie>> {
         val movieSearchResponse = movieService.searchMovie(title, page, type)
-        if (movieSearchResponse.isSuccess.lowercase() != "true") return Result.failure(RuntimeException("API Failure"))
+        if (!movieSearchResponse.isSuccess) return Result.failure(RuntimeException("API Failure"))
 
         return Result.success(movieSearchResponse.data.map {
             it.toDomain()

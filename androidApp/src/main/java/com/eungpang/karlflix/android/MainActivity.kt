@@ -19,7 +19,7 @@ import com.eungpang.karlflix.domain.repository.MovieRepository
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-fun greet(): String {
+suspend fun greet(): String {
     return Greeting().greeting()
 }
 
@@ -30,18 +30,23 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val coroutineScope = rememberCoroutineScope()
+            lateinit var greetingText: String
+            LaunchedEffect(Unit) {
+                greetingText = greet()
+            }
+
             var movieList by remember {
                 mutableStateOf<List<Movie>>(emptyList())
             }
 
             Column(modifier = Modifier.fillMaxSize()) {
-                Text(text = greet())
+                Text(text = greetingText)
 
                 TextButton(onClick = {
                     coroutineScope.launch {
                         val result = movieRepository.searchMovie("home")
                         if (result.isSuccess) {
-                            movieList += result.getOrDefault(emptyList())
+                            movieList = movieList + result.getOrDefault(emptyList())
                         }
                     }
 

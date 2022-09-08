@@ -1,8 +1,9 @@
 package com.eungpang.karlflix.android
 
 import android.app.Application
-import com.eungpang.karlflix.data.MovieRepositoryImpl
 import com.eungpang.karlflix.data.remote.KarlflixHttpClient
+import com.eungpang.karlflix.data.repository.MovieRepositoryImpl
+import com.eungpang.karlflix.di.initKoin
 import com.eungpang.karlflix.domain.repository.MovieRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -13,11 +14,13 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
 
-         startKoin {
-             androidLogger()
-             androidContext(this@App)
-             modules(appModule)
-         }
+        initKoin(appModule)
+
+        startKoin {
+            androidLogger()
+            androidContext(this@App)
+            modules(appModule)
+        }
     }
 }
 

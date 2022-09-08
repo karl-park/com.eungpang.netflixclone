@@ -8,9 +8,19 @@ import kotlinx.serialization.SerialName
 @kotlinx.serialization.Serializable
 data class MovieSearchResponse(
     @SerialName("Search") val data: List<MovieResponse>,
-    @SerialName("totalResults") val totalCount: String, // Int
-    @SerialName("Response") val isSuccess: String // True/false
-)
+    @SerialName("totalResults") val _totalCount: String, // Int
+    @SerialName("Response") val _isSuccess: String // True/false
+) {
+    val totalCount: Int
+        get() {
+            return try { _totalCount.toInt() }
+            catch (e: Exception) { 0 }
+        }
+
+    val isSuccess: Boolean
+        get() = _isSuccess.lowercase() == "true"
+
+}
 
 @kotlinx.serialization.Serializable
 data class MovieResponse(

@@ -1,7 +1,11 @@
 package com.eungpang.karlflix
 
+import kotlinx.coroutines.delay
+
 class Greeting {
-    fun greeting(): String {
+    @Throws(Exception::class)
+    suspend fun greeting(): String {
+        delay(100L)
         return "Hello, ${Platform().platform}!"
     }
 }
